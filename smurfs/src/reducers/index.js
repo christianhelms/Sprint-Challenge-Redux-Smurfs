@@ -1,4 +1,8 @@
-import {  } from './actions'
+import { 
+  FETCH,
+  GET_SMURFS,
+  ERROR,
+  ADD_SMURF } from '../actions'
 
  const defaultState ={
    smurfs: [],
@@ -9,6 +13,20 @@ import {  } from './actions'
    error: null
  }
 
+ export const rootReducer = (state = defaultState, action) => {
+  switch(action.type) {
+    case FETCH: 
+    return { ...state, fetchingSmurfs: true }
+    case GET_SMURFS:
+    return { ...state, fetchingSmurfs: false, smurfs: action.payload }
+    case ERROR:
+    return { ...state, fetchingSmurfs: false, error: action.payload }
+    case ADD_SMURF:
+    return { ...state, smurfs: action.payload, addingSmurf: true }
+    default:
+    return state
+  }
+ }
 
 /*
   You'll only need one smurf reducer for this project.
